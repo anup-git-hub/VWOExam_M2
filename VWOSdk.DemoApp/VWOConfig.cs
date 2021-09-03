@@ -24,14 +24,15 @@ namespace VWOSdk.DemoApp
             public static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>();
         }
 
-        internal static class FeatureTestData {
-            public static string CampaignKey = "";
+        internal static class FeatureTestData {           
+            public static string CampaignKey = "algorithm-campaign";
             public static string GoalIdentifier = "";
             public static Dictionary<string, dynamic> Options = new Dictionary<string, dynamic>();
-            public static string StringVariableKey = "";
-            public static string IntegerVariableKey = "";
+            public static string StringVariableKey = "mode";
+            public static string IntegerVariableKey = "speed";
             public static string DoubleVariableKey = "";
-            public static string BooleanVariableKey = "";
+            public static string BooleanVariableKey = "istest";
+            public static string JsonVariableKey = "model-data";
         }
     }
 }

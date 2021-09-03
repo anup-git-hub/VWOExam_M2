@@ -109,6 +109,7 @@ namespace VWOSdk.DemoApp.Controllers
             string integerVariableKey = VWOConfig.FeatureTestData.IntegerVariableKey;
             string booleanVariableKey = VWOConfig.FeatureTestData.BooleanVariableKey;
             string doubleVariableKey = VWOConfig.FeatureTestData.DoubleVariableKey;
+            string jsonVariableKey = VWOConfig.FeatureTestData.JsonVariableKey;
             string goalIdentifier = VWOConfig.FeatureTestData.GoalIdentifier;
             string CampaignKey = VWOConfig.FeatureTestData.CampaignKey;
             string campaignType = "Feature-test";
@@ -117,6 +118,7 @@ namespace VWOSdk.DemoApp.Controllers
             dynamic booleanVariable = null;
             dynamic stringVariable = null;
             dynamic doubleVariable = null;
+            dynamic jsonVariable = null;
             if (VWOClient != null)
             {
 
@@ -129,8 +131,10 @@ namespace VWOSdk.DemoApp.Controllers
                 integerVariable = VWOClient.GetFeatureVariableValue(CampaignKey, integerVariableKey, userId, options);
                 booleanVariable = VWOClient.GetFeatureVariableValue(CampaignKey, booleanVariableKey, userId, options);
                 doubleVariable = VWOClient.GetFeatureVariableValue(CampaignKey, doubleVariableKey, userId, options);
+                jsonVariable = VWOClient.GetFeatureVariableValue(CampaignKey, jsonVariableKey, userId, options);
+
             }
-            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, campaignType, activateResponse, options, stringVariable, integerVariable, booleanVariable, doubleVariable);
+            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, campaignType, activateResponse, options, stringVariable, integerVariable, booleanVariable, doubleVariable,jsonVariable);
             return View(json);
         }
 
