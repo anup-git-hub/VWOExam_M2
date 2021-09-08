@@ -44,20 +44,14 @@
                 <div>User did not become a part of feature test</div>
               </div>
             }
-            <div class="half-containers  center">
-              @if (@Model.BooleanVariable != null && @Model.BooleanVariable.GetType().Name == "bool") {
-              <button class="v1">BOOLEAN: @Model.BooleanVariable</button>
-              }
-              @if (@Model.BooleanVariable != null && @Model.IntegerVariable.GetType().Name == "int") {
-              <button class="v1">INTEGER: @Model.IntegerVariable</button>
-              }
-              @if (@Model.BooleanVariable != null && @Model.DoubleVariable.GetType().Name == "double") {
-              <button class="v1">DOUBLE: @Model.DoubleVariable</button>
-              }
-              @if (@Model.BooleanVariable != null && @Model.DoubleVariable.GetType().Name == "string") {
-              <button class="v1">STRING: @Model.StringVariable</button>
-              }
-            </div>
+          <div class="half-containers  center">
+              @if (@Model.BooleanVariable != null && @Model.BooleanVariable?.GetType() == typeof(bool)){ <button class="v1">BOOLEAN: @Model.BooleanVariable</button>}
+              @if (@Model.IntegerVariable != null && @Model.IntegerVariable?.GetType() == typeof(int)){<button class="v1">INTEGER: @Model.IntegerVariable</button>}
+              @if (@Model.DoubleVariable != null && @Model.DoubleVariable?.GetType() == typeof(double)){ <button class="v1">DOUBLE: @Model.DoubleVariable</button>}
+              @if (@Model.StringVariable != null && @Model.StringVariable.GetType() == typeof(string)){ <button class="v1">STRING: @Model.StringVariable</button>}
+              @if (@Model.JsonVariable != null){<button class="v1">JSON: @Model.JsonVariable</button>}
+             
+          </div>
           </div>
         </div>
       </div>

@@ -46,7 +46,8 @@ namespace VWOSdk.DemoApp.Models
         }
 
         // For Feature Test
-        public ViewModel(Settings settingsFile, string userId, string CampaignKey, string goalIdenfier, string campaignType, bool activateResponse, Dictionary<string, dynamic> customVariables, dynamic stringVariable, dynamic integerVariable, dynamic booleanVariable, dynamic doubleVariable)
+     
+        public ViewModel(Settings settingsFile, string userId, string CampaignKey, string goalIdenfier, string campaignType, bool activateResponse, Dictionary<string, dynamic> customVariables, dynamic stringVariable, dynamic integerVariable, dynamic booleanVariable, dynamic doubleVariable, dynamic jsonVariable)
         {
             this.UserId = userId;
             this.CurrentSettingsFile = settingsFile;
@@ -58,8 +59,8 @@ namespace VWOSdk.DemoApp.Models
             this.IntegerVariable = integerVariable;
             this.BooleanVariable = booleanVariable;
             this.DoubleVariable = doubleVariable;
+            this.JsonVariable = jsonVariable;
         }
-
         public Settings CurrentSettingsFile { get; set; }
 
         public string Settings { get
@@ -85,7 +86,7 @@ namespace VWOSdk.DemoApp.Models
         public dynamic BooleanVariable { get; set; }
 
         public dynamic DoubleVariable { get; set; }
-
+        public dynamic JsonVariable { get; set; }
         public string TagKey { get; set; }
 
         public dynamic TagValue { get; set; }

@@ -10,6 +10,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="VWO.Sdk" Version="1.14.0" />
+    <ProjectReference Include="..\..\VWOSdk\VWOSdk.NetStandard2.0\VWOSdk.NetStandard2.0.csproj" />
   </ItemGroup>
 </Project>
