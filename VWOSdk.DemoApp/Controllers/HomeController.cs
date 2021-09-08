@@ -90,6 +90,7 @@ namespace VWOSdk.DemoApp.Controllers
             var userId = string.IsNullOrEmpty(user) ? GetRandomName() : user;
             var options = VWOConfig.FeatureRolloutData.Options;
             string CampaignKey = VWOConfig.FeatureRolloutData.CampaignKey;
+            string goalIdentifier = VWOConfig.FeatureRolloutData.GoalIdentifier;
             string campaignType = "Feature-rollout";
             bool activateResponse = false;
             if (VWOClient != null)
