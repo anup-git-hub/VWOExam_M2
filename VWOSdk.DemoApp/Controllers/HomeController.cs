@@ -41,13 +41,12 @@ namespace VWOSdk.DemoApp.Controllers
             _batchData.FlushCallback = new FlushCallback();
             //logger.WriteLog(LogLevel.DEBUG, "BatchEventData : EventsPerRequest-" + Defaults.EventsPerRequest.ToString() +", RequestTimeInterval:" + Defaults.RequestTimeInterval);          
             //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData);
-
+          //  VWOClient = VWO.Launch(SettingsFile);
             //logger.WriteLog(LogLevel.DEBUG, "HookManager : IntegrationEventListener onEvent requested ");
-            //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, integrations: new HookManager(){HookCallback = new HookCallback()});
-
-            logger.WriteLog(LogLevel.DEBUG, "BatchEventData,userStorageService,isDevelopmentMode,integrations,shouldTrackReturningUser passed in SDK");
+            //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, integrations: new HookManager(){HookCallback = new HookCallback()});            
+            logger.WriteLog(LogLevel.DEBUG, "BatchEventData,userStorageService,isDevelopmentMode,integrations passed in SDK");
             VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, userStorageService: new UserStorageService(),
-                isDevelopmentMode: false, integrations: new HookManager() { HookCallback = new HookCallback() }, shouldTrackReturningUser: false);
+              isDevelopmentMode: false, integrations: new HookManager() { HookCallback = new HookCallback() });
         }
 
         [HttpGet]
@@ -135,7 +134,7 @@ namespace VWOSdk.DemoApp.Controllers
                 jsonVariable = VWOClient.GetFeatureVariableValue(CampaignKey, jsonVariableKey, userId, options);
 
             }
-            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, campaignType, activateResponse, options, stringVariable, integerVariable, booleanVariable, doubleVariable,jsonVariable);
+            var json = new ViewModel(SettingsFile, userId, CampaignKey, goalIdentifier, campaignType, activateResponse, options, stringVariable, integerVariable, booleanVariable, doubleVariable, jsonVariable);
             return View(json);
         }
 
