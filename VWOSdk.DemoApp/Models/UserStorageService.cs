@@ -8,7 +8,7 @@ namespace VWOSdk.DemoApp
     public class UserStorageService : IUserStorageService
     {
         private static string path = @"userStorageMaps.json";
-        private ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>> _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>();
+        private ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, dynamic>>> _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, dynamic>>>();
 
         public UserStorageService()
         {
@@ -23,42 +23,46 @@ namespace VWOSdk.DemoApp
             try
             {
                 string json = System.IO.File.ReadAllText(path);
-                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>>(json);
+                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, dynamic>>>>(json);
                 if (data != null)
                 {
-                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>(data);
+                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, dynamic>>>(data);
                 }
                 else
-                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, string>>>();
+                    _userStorageMap = new ConcurrentDictionary<string, ConcurrentDictionary<string, Dictionary<string, dynamic>>>();
             }
             catch { }
         }
 
         public UserStorageMap Get(string userId, string CampaignKey)
         {
-            Dictionary<string, string> userDict = null;
-            if (_userStorageMap.TryGetValue(CampaignKey, out ConcurrentDictionary<string, Dictionary<string, string>> userMap))
+            Dictionary<string, dynamic> userDict = null;
+            if (_userStorageMap.TryGetValue(CampaignKey, out ConcurrentDictionary<string, Dictionary<string, dynamic>> userMap))
                 userMap.TryGetValue(userId, out userDict);
 
             if (userDict != null)
-                return new UserStorageMap(userId, CampaignKey, userDict["VariationName"], userDict["GoalIdentifier"]);
+                return new UserStorageMap(userId, CampaignKey, userDict["VariationName"], userDict["GoalIdentifier"], userDict["MetaData"]);
 
             return null;
         }
 
         public void Set(UserStorageMap userStorageMap)
         {
-            if (_userStorageMap.TryGetValue(userStorageMap.CampaignKey, out ConcurrentDictionary<string, Dictionary<string, string>> userMap) == false)
+            if (_userStorageMap.TryGetValue(userStorageMap.CampaignKey, out ConcurrentDictionary<string, Dictionary<string, dynamic>> userMap) == false)
             {
-                userMap = new ConcurrentDictionary<string, Dictionary<string, string>>();
+                userMap = new ConcurrentDictionary<string, Dictionary<string, dynamic>>();
                 _userStorageMap[userStorageMap.CampaignKey] = userMap;
             }
-            if (userMap.ContainsKey(userStorageMap.UserId) && userMap[userStorageMap.UserId] != null && userStorageMap.GoalIdentifier != null ) {
+            if (userMap.ContainsKey(userStorageMap.UserId) && userMap[userStorageMap.UserId] != null && userStorageMap.GoalIdentifier != null)
+            {
                 userMap[userStorageMap.UserId]["GoalIdentifier"] = userStorageMap.GoalIdentifier;
-            } else {
-                userMap[userStorageMap.UserId] = new Dictionary<string, string>() {
+            }
+            else
+            {
+                userMap[userStorageMap.UserId] = new Dictionary<string, dynamic>() {
                     { "VariationName", userStorageMap.VariationName },
-                    { "GoalIdentifier", userStorageMap.GoalIdentifier }
+                    { "GoalIdentifier", userStorageMap.GoalIdentifier },
+                    { "MetaData",userStorageMap.MetaData }
                 };
             }
             SaveAsync();

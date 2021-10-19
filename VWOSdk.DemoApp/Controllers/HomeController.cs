@@ -39,11 +39,7 @@ namespace VWOSdk.DemoApp.Controllers
             _batchData.EventsPerRequest = Defaults.EventsPerRequest;
             _batchData.RequestTimeInterval = Defaults.RequestTimeInterval;
             _batchData.FlushCallback = new FlushCallback();
-            //logger.WriteLog(LogLevel.DEBUG, "BatchEventData : EventsPerRequest-" + Defaults.EventsPerRequest.ToString() +", RequestTimeInterval:" + Defaults.RequestTimeInterval);          
-            //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData);
-          //  VWOClient = VWO.Launch(SettingsFile);
-            //logger.WriteLog(LogLevel.DEBUG, "HookManager : IntegrationEventListener onEvent requested ");
-            //VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, integrations: new HookManager(){HookCallback = new HookCallback()});            
+            //VWOClient = VWO.Launch(SettingsFile);
             logger.WriteLog(LogLevel.DEBUG, "BatchEventData,userStorageService,isDevelopmentMode,integrations passed in SDK");
             VWOClient = VWO.Launch(SettingsFile, batchData: _batchData, userStorageService: new UserStorageService(),
               isDevelopmentMode: false, integrations: new HookManager() { HookCallback = new HookCallback() });
@@ -88,8 +84,7 @@ namespace VWOSdk.DemoApp.Controllers
         {
             var userId = string.IsNullOrEmpty(user) ? GetRandomName() : user;
             var options = VWOConfig.FeatureRolloutData.Options;
-            string CampaignKey = VWOConfig.FeatureRolloutData.CampaignKey;
-            string goalIdentifier = VWOConfig.FeatureRolloutData.GoalIdentifier;
+            string CampaignKey = VWOConfig.FeatureRolloutData.CampaignKey;          
             string campaignType = "Feature-rollout";
             bool activateResponse = false;
             if (VWOClient != null)

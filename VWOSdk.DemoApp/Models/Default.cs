@@ -4,14 +4,10 @@ namespace VWOSdk.DemoApp
 {
     internal class Defaults
     {
-        //public readonly static long AccountId = 0;
-        //public readonly static string SdkKey = "your-sdk-key";
-        //public readonly static string CampaignKey = "your-campaign-key";          ////Assign actual value;
-        //public readonly static string GoalIdentifier = "your-goal-identifier";          ////Assign actual value
-        public readonly static long AccountId = 60781;
-        public readonly static string SdkKey = "273dd994d39c117c93e4a7bab63152a4";
-        public readonly static string CampaignKey = "algorithm-campaign";          ////Assign actual value;
-        public readonly static string GoalIdentifier = "";
+        public readonly static long AccountId = 0;
+        public readonly static string SdkKey = "your-sdk-key";
+        public readonly static string CampaignKey = "your-campaign-key";          ////Assign actual value;
+        public readonly static string GoalIdentifier = "your-goal-identifier";          ////Assign actual value
         //SettingsFile Path
         public readonly static string SettingsFilePath = @"Resources/DemoSettingsFile.json";
         //Webhook
@@ -34,7 +30,15 @@ namespace VWOSdk.DemoApp
               "customVariables", new Dictionary<string, dynamic>()
               {
                   {
-                    "gender", "m"
+                    "browser","regex(chrome)"
+                  }
+              }
+            },
+             {
+              "metaData", new Dictionary<string, dynamic>()
+              {
+                  {
+                     "username", "any_user"
                   }
               }
             },
